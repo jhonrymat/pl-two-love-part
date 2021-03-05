@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
+    <script src="aframe-text-geometry-component.min.js"></script>
+    <script src="https://raw.githack.com/stemkoski/AR.js-examples/master/js/aframe-particle-system-component.js"></script>
+  </head>
+
+  <body style="margin: 0; overflow: hidden;">
+    <a-scene
+      vr-mode-ui="enabled: false;"
+      loading-screen="enabled: false;"
+      renderer="logarithmicDepthBuffer: true;"
+      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+      id="scene"
+      embedded
+      gesture-detector
+    >
+      <a-assets>
+        <a-asset-item
+          id="animated-asset"
+          src="https://cdn.glitch.com/f227f9c1-8683-4b9a-be37-3aaefd62c566%2Fassxxet.gltf?v=1614641482940"
+        ></a-asset-item>
+        <a-asset-item
+          id="exoFont"
+          src="https://cdn.glitch.com/619b5f7c-546e-49bf-bbf0-9128e60a2915%2FexoBlack.typeface.json?v=1614647034234"
+        ></a-asset-item>
+      </a-assets>
+
+      <a-marker
+        id="animated-marker"
+        type="pattern"
+        preset="custom"
+        url="https://cdn.glitch.com/f227f9c1-8683-4b9a-be37-3aaefd62c566%2Fpattern-pattern-WhatsApp%20Image%202021-02-19%20at%208.59.41%20PM%20(1).patt?v=1614642444907"
+        raycaster="objects: .clickable"
+        emitevents="true"
+        cursor="fuse: false; rayOrigin: mouse;"
+        id="markerA"
+      >
+        <a-entity
+          id="bowser-model"
+          scale="0.005 0.005 0.005"
+          rotation="-45 0 0"
+          position="0 0.9 -0.5"
+          animation-mixer="loop: repeat"
+          gltf-model="#animated-asset"
+          class="clickable"
+          gesture-handler
+        ></a-entity>
+
+        <a-entity
+          text-geometry="value: Feliz; font: #exoFont;"
+          material="color: red; repeat: 0.5 0.5;"
+          rotation="0 0 0"
+          position="-.7 .4 -.2"
+          scale=".8 .8 .8"
+        >
+        </a-entity>
+        <a-entity
+          text-geometry="value: Dia; font: #exoFont;"
+          material="color: red; repeat: 0.5 0.5;"
+          rotation="0 0 0"
+          position="-.5 .1 0"
+          scale=".8 .8 .8"
+        >
+        </a-entity>
+        <a-entity
+          position="0 0 0"
+          particle-system="
+                texture: https://cdn.glitch.com/f227f9c1-8683-4b9a-be37-3aaefd62c566%2Fcorazon.png?v=1614967226388;
+                color: #FFFFFF, #FF6AC2; 
+                size: 0, 1;
+                velocityValue: 0.001 0.001 0.001;
+                velocitySpread: 0.5 0 0.5; 
+                accelerationValue: 0.001 0.001 0.001;
+                accelerationSpread: 0.001 0.001 0.001;
+                rotationAngle: 0; 
+                blending: 1;
+                particleCount: 100;
+                maxAge: 5; "
+        >
+        </a-entity>
+      </a-marker>
+
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
